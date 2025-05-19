@@ -1,0 +1,16 @@
+{
+    "name": "My Portfolio",
+    "short_name": "Portfolio",
+    "description": "Personal portfolio with animations",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#b4ef02",
+    "icons": [
+        {
+            "src": "/favicon.ico",
+            "sizes": "64x64",
+            "type": "image/x-icon"
+        }
+    ]
+}
