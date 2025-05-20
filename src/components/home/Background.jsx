@@ -8,7 +8,7 @@ function Background() {
     const letters = text.split('');
 
     return (
-        <div className="h-screen w-screen sticky top-[0] z-[5] bg-gradient-to-l from-stone-50 via-amber-50 to-yellow-100">
+        <div className="h-screen w-screen sticky top-[0] z-[5]">
             <h3 className="font-ppnm text-[54px] top-[50%] translate-y-[-50%] absolute left-[52px] leading-[1.2] tracking-wide flex">
                 {letters.map((letter, index) => (
                     <motion.span

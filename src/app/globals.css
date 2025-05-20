@@ -88,6 +88,16 @@ ol {
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+}
+
 /* Dynamic typography classes (generated from styleGenerator.ts) */
 .ppnm-r-8 {
     font-family: 'PPNeueMontreal-Regular';
@@ -348,4 +358,28 @@ ol {
     font-family: 'PPNeueMontreal-Thin';
     font-size: 48px;
     letter-spacing: 0.1em;
+}
+
+@font-face {
+    font-family: 'PP Neue Montreal';
+    src: url('/assets/fonts/PPNeueMontreal-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Neue Montreal';
+    src: url('/assets/fonts/PPNeueMontreal-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Neue Montreal';
+    src: url('/assets/fonts/PPNeueMontreal-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
 }
