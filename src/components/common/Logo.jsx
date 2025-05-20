@@ -2,8 +2,14 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useCurrentSection } from '@/hooks/useLayoutStore';
 
 const Logo = () => {
+    const currentSection = useCurrentSection();
+
+    // Determine stroke color based on section
+    const strokeColor = currentSection === 1 ? 'stroke-white' : 'stroke-black';
+
     const pathVariants = {
         hidden: { pathLength: 0, opacity: 0 },
         visible: (i) => ({
@@ -39,7 +45,7 @@ const Logo = () => {
             xmlns="http://www.w3.org/2000/svg"
             initial="hidden"
             animate="visible"
-            className="stroke-black"
+            className={`${strokeColor}`}
         >
             {/* K - First letter (moved right) */}
             <motion.path d="M18 5 L18 35" strokeWidth="1.5" strokeLinecap="round" custom={0} variants={pathVariants} />

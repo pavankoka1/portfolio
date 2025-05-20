@@ -1,13 +1,14 @@
 import { create } from 'zustand';
 
 // Create a store for layout-related state
-const useLayoutStore = create((set) => ({
+export const useLayoutStore = create((set) => ({
     // Window dimensions
     width: typeof window !== 'undefined' ? window.innerWidth : 0,
     height: typeof window !== 'undefined' ? window.innerHeight : 0,
 
     // Scroll position
     scrollY: 0,
+    currentSection: 0,
 
     // Device details
     isMobile: typeof window !== 'undefined' ? window.innerWidth < 768 : false,
@@ -28,7 +29,14 @@ const useLayoutStore = create((set) => ({
             isTablet: width >= 768 && width < 1024,
             isDesktop: width >= 1024,
         }),
-    _setScrollY: (scrollY) => set({ scrollY }),
+    _setScrollY: (scrollY) => {
+        const height = useLayoutStore.getState().height;
+        // Calculate the threshold (25% of section height)
+        const threshold = height * 0.25;
+        // Calculate which section we're in based on scroll position and threshold
+        const currentSection = Math.floor((scrollY + threshold) / height);
+        set({ scrollY, currentSection });
+    },
 }));
 
 // Initialize layout listeners - to be called at layout level
@@ -37,62 +45,70 @@ export const initLayout = () => {
         useLayoutStore.getState()._setDimensions(window.innerWidth, window.innerHeight);
     };
 
-    const handleScroll = () => {
-        useLayoutStore.getState()._setScrollY(window.scrollY);
-    };
-
     // Add event listeners
     window.addEventListener('resize', handleResize, { passive: true });
-    window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Set initial values
     handleResize();
-    handleScroll();
 
     // Return cleanup function
     return () => {
         window.removeEventListener('resize', handleResize);
-        window.removeEventListener('scroll', handleScroll);
     };
-};
-
-// Hook that returns all layout state
-export const useLayout = () => {
-    return useLayoutStore((state) => ({
-        width: state.width,
-        height: state.height,
-        scrollY: state.scrollY,
-        isMobile: state.isMobile,
-        isTablet: state.isTablet,
-        isDesktop: state.isDesktop,
-        isSafari: state.isSafari,
-        isChrome: state.isChrome,
-        isFirefox: state.isFirefox,
-    }));
 };
 
 // Individual hooks for specific values
 export const useWindowSize = () => {
-    return useLayoutStore((state) => ({
-        width: state.width,
-        height: state.height,
-    }));
+    const width = useLayoutStore((state) => state.width);
+    const height = useLayoutStore((state) => state.height);
+    return { width, height };
+};
+
+export const useScrollPosition = () => {
+    return useLayoutStore((state) => state.scrollY);
+};
+
+export const useCurrentSection = () => {
+    return useLayoutStore((state) => state.currentSection);
 };
 
 export const useDeviceType = () => {
-    return useLayoutStore((state) => ({
-        isMobile: state.isMobile,
-        isTablet: state.isTablet,
-        isDesktop: state.isDesktop,
-    }));
+    const isMobile = useLayoutStore((state) => state.isMobile);
+    const isTablet = useLayoutStore((state) => state.isTablet);
+    const isDesktop = useLayoutStore((state) => state.isDesktop);
+    return { isMobile, isTablet, isDesktop };
 };
 
 export const useBrowserType = () => {
-    return useLayoutStore((state) => ({
-        isSafari: state.isSafari,
-        isChrome: state.isChrome,
-        isFirefox: state.isFirefox,
-    }));
+    const isSafari = useLayoutStore((state) => state.isSafari);
+    const isChrome = useLayoutStore((state) => state.isChrome);
+    const isFirefox = useLayoutStore((state) => state.isFirefox);
+    return { isSafari, isChrome, isFirefox };
 };
 
-export default useLayoutStore;
+// Hook that returns all layout state (use with caution)
+export const useLayout = () => {
+    const width = useLayoutStore((state) => state.width);
+    const height = useLayoutStore((state) => state.height);
+    const scrollY = useLayoutStore((state) => state.scrollY);
+    const currentSection = useLayoutStore((state) => state.currentSection);
+    const isMobile = useLayoutStore((state) => state.isMobile);
+    const isTablet = useLayoutStore((state) => state.isTablet);
+    const isDesktop = useLayoutStore((state) => state.isDesktop);
+    const isSafari = useLayoutStore((state) => state.isSafari);
+    const isChrome = useLayoutStore((state) => state.isChrome);
+    const isFirefox = useLayoutStore((state) => state.isFirefox);
+
+    return {
+        width,
+        height,
+        scrollY,
+        currentSection,
+        isMobile,
+        isTablet,
+        isDesktop,
+        isSafari,
+        isChrome,
+        isFirefox,
+    };
+};

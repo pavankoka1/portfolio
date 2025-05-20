@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { initLayout } from '@/hooks/useLayoutStore';
+import React, { useEffect, useRef } from 'react';
+import { initLayout, useLayoutStore } from '@/hooks/useLayoutStore';
+import { initScroll } from '@/hooks/useScrollStore';
 import ConstantLeft from '@/components/home/ConstantLeft';
 import TimeLocation from '@/components/home/TimeLocation';
 import ScrollIndicator from '@/components/home/ScrollIndicator';
@@ -11,10 +12,35 @@ import Section3 from '@/components/sections/Section3';
 import Section4 from '@/components/sections/Section4';
 
 export default function Home() {
-    // Initialize layout listeners
+    const scrollContainerRef = useRef(null);
+
+    // Initialize layout and scroll listeners
     useEffect(() => {
-        const cleanup = initLayout();
-        return cleanup;
+        const layoutCleanup = initLayout();
+        const scrollCleanup = initScroll();
+
+        // Custom scroll handler for the container
+        const handleContainerScroll = () => {
+            if (scrollContainerRef.current) {
+                const scrollY = scrollContainerRef.current.scrollTop;
+                useLayoutStore.getState()._setScrollY(scrollY);
+            }
+        };
+
+        // Add scroll listener to the container
+        const container = scrollContainerRef.current;
+        if (container) {
+            container.addEventListener('scroll', handleContainerScroll, { passive: true });
+        }
+
+        // Return combined cleanup function
+        return () => {
+            layoutCleanup();
+            scrollCleanup();
+            if (container) {
+                container.removeEventListener('scroll', handleContainerScroll);
+            }
+        };
     }, []);
 
     return (
@@ -22,17 +48,17 @@ export default function Home() {
             <ConstantLeft />
             <TimeLocation />
             <ScrollIndicator />
-            <div className="snap-y snap-mandatory h-screen overflow-y-scroll scrollbar-hide">
-                <div className="snap-start">
+            <div ref={scrollContainerRef} className="snap-y snap-mandatory h-screen overflow-y-scroll scrollbar-hide">
+                <div className="snap-start h-screen">
                     <Section1 />
                 </div>
-                <div className="snap-start">
+                <div className="snap-start h-screen">
                     <Section2 />
                 </div>
-                <div className="snap-start">
+                <div className="snap-start h-screen">
                     <Section3 />
                 </div>
-                <div className="snap-start">
+                <div className="snap-start h-screen">
                     <Section4 />
                 </div>
             </div>
