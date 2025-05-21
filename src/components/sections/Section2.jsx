@@ -10,13 +10,25 @@ const Section2 = () => {
     const [isAnimating, setIsAnimating] = useState(false);
     const [activeCard, setActiveCard] = useState(null);
     const [cardPosition, setCardPosition] = useState(null);
+    const [progress, setProgress] = useState(0);
 
     useEffect(() => {
         const interval = setInterval(() => {
             setIsAnimating((prev) => !prev);
-        }, 6000);
+            setProgress(0);
+        }, 5000);
 
-        return () => clearInterval(interval);
+        const progressInterval = setInterval(() => {
+            setProgress((prev) => {
+                if (prev >= 100) return 0;
+                return prev + 1;
+            });
+        }, 50);
+
+        return () => {
+            clearInterval(interval);
+            clearInterval(progressInterval);
+        };
     }, []);
 
     const cardVariants = {
@@ -114,8 +126,24 @@ const Section2 = () => {
 
     return (
         <section className="h-screen w-screen relative bg-gradient-to-l from-gray-900 via-gray-950 to-black overflow-hidden">
-            <div className="absolute top-[52%] left-[42%] translate-y-[-50%]">
+            <div className="absolute top-[56%] left-[42%] translate-y-[-50%]">
                 <div className="relative" style={{ width: '800px', height: '600px' }}>
+                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-48">
+                        <div className="flex items-center gap-2">
+                            <div className="w-full h-1 bg-gray-700 rounded-full overflow-hidden">
+                                <motion.div
+                                    className="h-full bg-blue-500/50"
+                                    initial={{ width: '0%' }}
+                                    animate={{ width: `${progress}%` }}
+                                    transition={{ duration: 0.05, ease: 'linear' }}
+                                />
+                            </div>
+                            <span className="text-xs text-gray-400 font-medium">
+                                {Math.ceil((5000 - progress * 50) / 1000)}s
+                            </span>
+                        </div>
+                    </div>
+
                     {cards.map((card, index) => {
                         const isSquare = isAnimating
                             ? index === 1 || index === 2 // 2 and 3 stay square

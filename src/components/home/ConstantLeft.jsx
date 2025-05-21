@@ -1,19 +1,23 @@
+'use client';
 import React from 'react';
 import * as motion from 'motion/react-client';
 import { useCurrentSection } from '@/hooks/useLayoutStore';
 
-function ConstantLeft() {
+function ConstantLeft({ color }) {
     const currentSection = useCurrentSection();
     const text = "Koka's Magic";
     const letters = text.split('');
 
-    // Determine text color based on section
-    const textColor = currentSection === 1 ? 'text-white' : 'text-stone-800';
+    // Determine text color based on section if no color prop is provided
+    const getTextColor = () => {
+        if (color) return color;
+        return currentSection === 1 ? 'text-white' : 'text-stone-800';
+    };
 
     return (
         <div className="fixed left-0 top-0 h-screen w-screen pointer-events-none z-50">
             <div className="absolute left-[52px] top-[50%] translate-y-[-50%]">
-                <h3 className={`font-ppnm text-[64px] leading-[1.2] tracking-wide flex ${textColor}`}>
+                <h3 className={`font-ppnm text-[64px] leading-[1.2] tracking-wide flex ${getTextColor()}`}>
                     {letters.map((letter, index) => (
                         <motion.span
                             key={index}
