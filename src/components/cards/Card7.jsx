@@ -31,7 +31,7 @@ export default {
   <div v-if="loading">Loading...</div>
   <div v-else>{{ user.name }}</div>
 </template>`}
-            color="bg-gradient-to-br from-[#41B883]/45 via-[#41B883]/30 to-[#34495E]/20"
+            color="bg-gradient-to-br from-[#41B883]/70 via-[#41B883]/50 to-[#34495E]/40 backdrop-blur-sm"
             textColor="text-[#41B883]"
         />
     );

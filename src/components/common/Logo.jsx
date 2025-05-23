@@ -4,11 +4,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useCurrentSection } from '@/hooks/useLayoutStore';
 
-const Logo = () => {
+const Logo = ({ color }) => {
     const currentSection = useCurrentSection();
 
-    // Determine stroke color based on section
-    const strokeColor = currentSection === 1 ? 'stroke-white' : 'stroke-black';
+    // Use provided color or determine stroke color based on section
+    const strokeColor = color ? color : currentSection === 1 ? 'stroke-white' : 'stroke-black';
 
     const pathVariants = {
         hidden: { pathLength: 0, opacity: 0 },

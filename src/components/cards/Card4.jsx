@@ -29,7 +29,7 @@ const UserProfile = () => {
   if (loading) return <div>Loading...</div>;
   return <div>{user.name}</div>;
 };`}
-            color="bg-gradient-to-br from-[#61DAFB]/40 via-[#00D8FF]/30 to-[#61DAFB]/20"
+            color="bg-gradient-to-br from-[#61DAFB]/70 via-[#00D8FF]/50 to-[#61DAFB]/40 backdrop-blur-sm"
             textColor="text-[#61DAFB]"
         />
     );

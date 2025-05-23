@@ -7,7 +7,7 @@ import AnimatedText from './AnimatedText';
 export default function CardsLayout() {
     return (
         <div className="h-[600vh] relative">
-            <ConstantLeft color="text-stone-800" />
+            <ConstantLeft color="text-white/60" />
             <CardLayout />
             <AnimatedText />
         </div>

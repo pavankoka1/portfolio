@@ -7,7 +7,7 @@ export default function Card10() {
     return (
         <Card
             order={10}
-            logo={<SiExpress className="w-full h-full text-black" />}
+            logo={<SiExpress className="w-full h-full text-white" />}
             title="Express"
             code={`// Express Middleware
 const express = require('express');
@@ -27,8 +27,8 @@ const errorHandler = (err, req, res, next) => {
 
 app.use(logger);
 app.use(errorHandler);`}
-            color="bg-gradient-to-br from-black/45 via-black/30 to-gray-700/20"
-            textColor="text-black"
+            color="bg-gradient-to-br from-white/40 via-white/30 to-white/20 backdrop-blur-sm"
+            textColor="text-white"
         />
     );
 }

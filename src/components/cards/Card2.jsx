@@ -28,7 +28,7 @@ export default function Card2() {
 .card:hover {
   transform: translateY(-5px);
 }`}
-            color="bg-gradient-to-br from-[#264DE4]/45 via-[#2965F1]/30 to-[#1E90FF]/20"
+            color="bg-gradient-to-br from-[#264DE4]/70 via-[#2965F1]/50 to-[#1E90FF]/40 backdrop-blur-sm"
             textColor="text-[#264DE4]"
         />
     );

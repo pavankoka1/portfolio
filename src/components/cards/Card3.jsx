@@ -27,7 +27,7 @@ const processData = (data) => {
     .map(({ id, name }) => ({ id, name }))
     .reduce((acc, curr) => ({ ...acc, [curr.id]: curr }), {});
 };`}
-            color="bg-gradient-to-br from-[#F7DF1E]/35 via-[#F7DF1E]/25 to-[#F0DB4F]/15"
+            color="bg-gradient-to-br from-[#F7DF1E]/80 via-[#F7DF1E]/60 to-[#F0DB4F]/40 backdrop-blur-sm"
             textColor="text-[#F7DF1E]"
         />
     );

@@ -31,7 +31,7 @@ app.post('/api/users', async (req, res) => {
 app.listen(3000, () => {
   console.log('Server running on port 3000');
 });`}
-            color="bg-gradient-to-br from-[#339933]/45 via-[#339933]/30 to-[#2B5E2B]/20"
+            color="bg-gradient-to-br from-[#339933]/70 via-[#339933]/50 to-[#2B5E2B]/40 backdrop-blur-sm"
             textColor="text-[#339933]"
         />
     );

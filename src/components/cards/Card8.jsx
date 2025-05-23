@@ -9,25 +9,25 @@ export default function Card8() {
             order={8}
             logo={<SiNuxtdotjs className="w-full h-full text-[#00DC82]" />}
             title="Nuxt"
-            code={`// Nuxt 3 Page
+            code={`// Nuxt 3 Page Component
 <script setup>
-const { data: user } = await useFetch('/api/user')
+const { data: posts } = await useFetch('/api/posts')
 
-// Server-side composable
-const { data: posts } = await useAsyncData('posts', () => 
-  $fetch('/api/posts')
-)
+const title = ref('My Blog')
+const description = ref('Welcome to my blog')
 </script>
 
 <template>
   <div>
-    <h1>{{ user.name }}</h1>
+    <h1>{{ title }}</h1>
+    <p>{{ description }}</p>
     <div v-for="post in posts" :key="post.id">
-      {{ post.title }}
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.excerpt }}</p>
     </div>
   </div>
 </template>`}
-            color="bg-gradient-to-br from-[#00DC82]/30 via-[#00DC82]/20 to-[#00DC82]/10"
+            color="bg-gradient-to-br from-[#00DC82]/70 via-[#00DC82]/50 to-[#00DC82]/40 backdrop-blur-sm"
             textColor="text-[#00DC82]"
         />
     );

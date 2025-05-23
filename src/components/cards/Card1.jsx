@@ -23,7 +23,7 @@ export default function Card1() {
     <p>Copyright 2025</p>
   </footer>
 </html>`}
-            color="bg-gradient-to-br from-[#E34F26]/40 via-[#E34F26]/25 to-[#F16529]/15"
+            color="bg-gradient-to-br from-[#E34F26]/60 via-[#E34F26]/40 to-[#F16529]/30 backdrop-blur-sm"
             textColor="text-[#E34F26]"
         />
     );

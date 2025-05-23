@@ -27,7 +27,7 @@ const userSlice = createSlice({
 
 export const { setUser, setLoading } = userSlice.actions;
 export default userSlice.reducer;`}
-            color="bg-gradient-to-br from-[#764ABC]/45 via-[#764ABC]/30 to-[#9B6BDF]/20"
+            color="bg-gradient-to-br from-[#764ABC]/70 via-[#764ABC]/50 to-[#9B6BDF]/40 backdrop-blur-sm"
             textColor="text-[#764ABC]"
         />
     );

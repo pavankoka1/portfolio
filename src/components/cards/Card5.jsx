@@ -7,7 +7,7 @@ export default function Card5() {
     return (
         <Card
             order={5}
-            logo={<SiNextdotjs className="w-full h-full text-black" />}
+            logo={<SiNextdotjs className="w-full h-full text-white" />}
             title="Next.js"
             code={`// Next.js App Router
 import { Suspense } from 'react';
@@ -24,8 +24,8 @@ async function UserProfile() {
   const user = await fetchUser();
   return <div>{user.name}</div>;
 }`}
-            color="bg-gradient-to-br from-black/40 via-black/25 to-gray-800/20"
-            textColor="text-black"
+            color="bg-gradient-to-br from-white/40 via-white/30 to-white/20 backdrop-blur-sm"
+            textColor="text-white"
         />
     );
 }
